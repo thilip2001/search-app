@@ -1,24 +1,52 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+import "./App.css";
+import datas from "./data.json";
 
 function App() {
+  const [value, setValue] = useState("");
+
+  const onChange = (event) => {
+    setValue(event.target.value);
+  };
+  const onSearch = (searchTerm) => {
+    setValue(searchTerm)
+    console.log("search", searchTerm);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <div className="container  min-vh-100 py-4">
+        <div className="row mt-5">
+          <div className="col-md-5 mx-auto">
+            <div className="fs-2 fw-bold text-primary text-center pb-3">
+              Dev<span className="text-warning">Go</span>
+            </div>
+            <div className="input-group mb-3">
+              <input
+                type="text"
+                className="form-control"
+                placeholder="Search"
+                value={value}
+                onChange={onChange}
+              />
+              <button className="btn btn-dark" onClick={() => onSearch(value)}>
+                Go
+              </button>
+            </div>
+            <div className="dropdown-content">{
+              datas.filter((data)=>{
+                const searchTerm=value.toLowerCase();
+                const name = data.toLowerCase();
+                return searchTerm && name.startsWith(searchTerm) && name !== searchTerm
+              }).slice(0,10)
+              .map((data)=><div className="list" onClick={()=>onSearch(data)} key={data}>{data}</div>)
+            }
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </>
   );
 }
 
