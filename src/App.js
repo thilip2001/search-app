@@ -21,10 +21,10 @@ function App() {
             <div className="fs-2 fw-bold text-primary text-center pb-3">
               Dev<span className="text-warning">Go</span>
             </div>
-            <div className="input-group mb-3">
+            <div className="input-group mb-1">
               <input
                 type="text"
-                className="form-control"
+                className="form-control bg-transparent"
                 placeholder="Search"
                 value={value}
                 onChange={onChange}
@@ -33,7 +33,7 @@ function App() {
                 Go
               </button>
             </div>
-            <div className="dropdown-content">{
+            <div className="dropdown-content mt-0 bg-white p-1 rounded">{
               datas.filter((data)=>{
                 const searchTerm=value.toLowerCase();
                 const name = data.toLowerCase();
